@@ -31,11 +31,12 @@
           </button>
          <a class="navbar-brand" href="/">[[.Title]]</a>   
         </div>
+
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
           <ul class="nav navbar-nav">
             <li class="hidden-xs">
               <a href="javascript:void(0)" v-on:click='genQrcode()'>
-                View in Phone
+                <!-- View in Phone  -->
                 <span class="glyphicon glyphicon-qrcode"></span>
               </a>
             </li>
@@ -53,15 +54,37 @@
             </template>
             [[end]]
           </ul>
+
           <form class="navbar-form navbar-right">
             <div class="input-group">
-              <input type="text" name="search" class="form-control" placeholder="Search text" v-bind:value="search"
-                autofocus>
+              
+
+            <!--
               <span class="input-group-btn">
                 <button class="btn btn-default" type="button">
                   <span class="glyphicon glyphicon-search"></span>
                 </button>
               </span>
+
+            <input type="text" name="search" class="form-control" placeholder="Search" v-bind:value="search"
+              autofocus>
+
+            -->
+
+            
+
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" v-on:click="search_clicked">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+
+            
+            <input type="text" name="search" class="form-control" placeholder="Search" v-model="search"
+            autofocus>
+
+
+
             </div>
           </form>
           <ul id="nav-right-bar" class="nav navbar-nav navbar-right">
@@ -107,9 +130,14 @@
                 <button class="btn btn-xs btn-default" onclick="history.back()">
                   Back <i class="fa fa-arrow-left"></i>
                 </button>
+
+
+             <!--   
                 <button class="btn btn-xs btn-default" v-on:click='toggleHidden()'>
                   Hidden <i class="fa" v-bind:class='showHidden ? "fa-eye" : "fa-eye-slash"'></i>
                 </button>
+              -->  
+                
                 <button class="btn btn-xs btn-default" v-show="auth.upload" data-toggle="modal" data-target="#upload-modal">
                   Upload <i class="fa fa-upload"></i>
                 </button>

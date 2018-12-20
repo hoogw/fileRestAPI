@@ -124,7 +124,48 @@ var vm = new Vue({
       }
     });
   },
+  
+  
   methods: {
+
+       // ------------ search icon clicked event ----------------
+         
+              search_clicked: function (event) {
+                // `this` inside methods points to the Vue instance
+              // alert('Hello ' + this.search + '!')
+              
+              
+                  var searchParams = new URLSearchParams(window.location.search)
+                  searchParams.set("search", this.search);
+       
+        
+                  // this cause reload  https://stackoverflow.com/questions/5999118/how-can-i-add-or-update-a-query-string-parameter
+                  //window.location.search = searchParams.toString();
+
+                // to avoid reload
+                // var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+                //history.pushState(null, '', newRelativePathQuery);
+
+                // here I do want reload, so must use this.
+                window.location.search = searchParams.toString();
+                
+                // no need this, because last line already cause reload.
+                // location.reload();
+                    
+                    // `event` is the native DOM event
+                    if (event) {
+                    // alert(event.target.tagName)
+
+        }
+      },
+
+      // ---- end ---- search icon clicked event ----------------
+
+
+
+
+
+
     formatTime: function (timestamp) {
       var m = moment(timestamp);
       if (this.mtimeTypeFromNow) {
@@ -334,6 +375,7 @@ var vm = new Vue({
 window.onpopstate = function (event) {
   if (location.search.match(/\?search=/)) {
     location.reload();
+
     return;
   }
   loadFileList()
